@@ -10,23 +10,46 @@ pipeline{
     {
         stage("Build"){
             steps{
-                mail to: "mnouri.2002.10@gmail.com",
-                subject: "Building",
-                body: "Building completed"
                 echo "fetched the code from $DIRECTORY_PATH"
                 echo "Building completed..."
             }
         }
 
-        stage("Test"){
+        stage("Unit and Integration Test"){
             steps{
-                mail to: "mnouri.2002.10@gmail.com",
-                subject: "Testing",
-                body: "Testing completed"
                 echo "Unit test"
-                echo "iIntegrated test"
+                echo "Integrated test"
                 echo "Testing completed..."
+                mail to: "mnouri.2002.10@gmail.com",
+                subject: "Unit and Integration Test",
+                body: "Testing completed"
             }
         } 
+        stage("Code Analysis"){
+            steps{
+                echo "Testing the code and analysing"
+                echo "Analysing completed..."
+            }
+        }
+        stage("Security Scan"){
+            steps{
+                echo "Scanning for vulnerability"
+                echo "Scanning completed..."
+                mail to: "mnouri.2002.10@gmail.com",
+                subject: "Security Scan",
+                body: "Security Scan completed"
+            }
+        }
+        stage("Integration test on Staging"){
+            steps{
+                echo "Testing to see if it functions as expected"
+                echo "Completed..."
+            }
+        }
+        stage("Deploy to Prodcution"){
+            steps{
+                echo "Deployed to production completed"
+            }
+        }
     }
 }
